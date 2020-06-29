@@ -7,6 +7,7 @@ import time
 
 
 def minus_log_likelihood(k, lamb):
+    ''' Loss of negative log likelihood, more details in report.pdf'''
     return np.log(np.math.factorial(k)) - k * np.log(lamb) + lamb
 
 
@@ -48,7 +49,8 @@ def main():
     print('Start training!')
     loss = []
 
-    def gradient_alpha(i):  # update from goals
+    def gradient_alpha(i):
+        ''' update alpha's gradient from goals, more detail in report.pdf '''
         gradient = 0
         for index, row in df[df['home_number'] == i].iterrows():
             gradient += row['home_score']/(alpha[i] - beta[row['away_number']]) - 1
@@ -56,7 +58,8 @@ def main():
             gradient += row['away_score'] / (alpha[i] - beta[row['home_number']]) - 1
         return gradient
 
-    def gradient_beta(i):  # update from goals conceded
+    def gradient_beta(i): 
+        ''' update alpha's gradient from goal conceded, more detail in report.pdf '''
         gradient = 0
         for index, row in df[df['home_number'] == i].iterrows():
             gradient += 1 - row['away_score']/(alpha[row['away_number']] - beta[i])
@@ -79,6 +82,8 @@ def main():
         loss.append(previous_l)
 
     print('Finish!!!!   log_likelihood:', cal_l())
+
+    # show the result
     plt.figure()
     plt.title('Minus log likelihood')
     plt.plot(loss)

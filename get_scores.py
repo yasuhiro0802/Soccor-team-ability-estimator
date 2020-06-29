@@ -4,6 +4,8 @@ import time
 
 
 def main():
+    ''' grab the match result from BBC Sports website and store into the output.csv'''
+
     session = HTMLSession()
     html = 'https://www.bbc.com/sport/football/premier-league/scores-fixtures/'
     month = ['2019-08', '2019-09', '2019-10', '2019-11', '2019-12', '2020-01', '2020-02', '2020-03']
